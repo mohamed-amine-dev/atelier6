@@ -8,6 +8,8 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "absence")
 @Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString

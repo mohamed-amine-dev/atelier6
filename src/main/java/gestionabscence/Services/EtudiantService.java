@@ -5,60 +5,51 @@ import gestionabscence.DTOs.EtudiantResponse;
 import gestionabscence.DTOs.EtudiantUpdate;
 import gestionabscence.Entities.Departement;
 import gestionabscence.Entities.Etudiant;
-import gestionabscence.Repositories.DepartementRepo;
-import gestionabscence.Repositories.EtudiantRepo;
-import gestionabscence.Utils.EtudiantService;
+import gestionabscence.Repositories.DepartementRepository;
+import gestionabscence.Repositories.EtudiantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class EtudiantServiceImpl implements EtudiantService {
+public class EtudiantService {
 
     @Autowired
-    private EtudiantRepo etudiantRepo;
+    private EtudiantRepository etudiantRepository;
 
     @Autowired
-    private DepartementRepo departementRepo;
+    private DepartementRepository departementRepository;
 
-
-
-    @Override
     public Etudiant create(EtudiantCreate etudiant) {
-
         Etudiant etd = new Etudiant();
         etd.setNom(etudiant.nom());
         etd.setPrenom(etudiant.prenom());
         etd.setDate(etudiant.date());
         etd.setClasse(etudiant.classe());
-        etudiantRepo.save(etd);
+        etudiantRepository.save(etd);
         return etd;
     }
 
-    @Override
-    public Etudiant Update(Long id, EtudiantUpdate etudiant) {
-        Etudiant etd = etudiantRepo.findById(id).orElse(null);
-        if(etd != null) {
-            throw new RuntimeException("aucune etudiant avec ce id");
+    public Etudiant update(Long id, EtudiantUpdate etudiant) {
+        Etudiant etd = etudiantRepository.findById(id).orElse(null);
+        if(etd == null) {
+            throw new RuntimeException("Aucun étudiant avec cet ID");
         }
         etd.setNom(etudiant.nom());
         etd.setPrenom(etudiant.prenom());
         etd.setDate(etudiant.date());
         etd.setClasse(etudiant.classe());
-        etudiantRepo.save(etd);
+        etudiantRepository.save(etd);
         return etd;
     }
 
-    @Override
     public Void delete(Long id) {
-        Etudiant etd = etudiantRepo.findById(id).get();
+        Etudiant etd = etudiantRepository.findById(id).get();
         if(etd.getNom().equals("null")){
-            throw new RuntimeException("aucune etudiant avec ce id");
-
+            throw new RuntimeException("Aucun étudiant avec cet ID");
         }
-
-        etudiantRepo.delete(etd);
+        etudiantRepository.delete(etd);
         return null;
     }
 
@@ -73,35 +64,26 @@ public class EtudiantServiceImpl implements EtudiantService {
         );
     }
 
-    @Override
     public EtudiantResponse findOne(Long id) {
-        Etudiant etd = etudiantRepo.findById(id)
+        Etudiant etd = etudiantRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Étudiant non trouvé"));
-
         return toResponse(etd);
     }
 
-    @Override
     public List<EtudiantResponse> findAll() {
-        return etudiantRepo.findAll()
+        return etudiantRepository.findAll()
                 .stream()
                 .map(this::toResponse)
                 .toList();
     }
 
-    @Override
-    public String affecterDepartement(Long idEtudiant, Long idDepartement) {
-
-        Departement dep = departementRepo.findById(idDepartement)
+    public String assignDepartement(Long idEtudiant, Long idDepartement) {
+        Departement dep = departementRepository.findById(idDepartement)
                 .orElseThrow(() -> new RuntimeException("Département introuvable !"));
-
-        Etudiant etd = etudiantRepo.findById(idEtudiant)
+        Etudiant etd = etudiantRepository.findById(idEtudiant)
                 .orElseThrow(() -> new RuntimeException("Étudiant introuvable !"));
-
         etd.setDepartement(dep);
-
-        etudiantRepo.save(etd);
-
+        etudiantRepository.save(etd);
         return "Département affecté avec succès à l'étudiant " + etd.getNom();
     }
 }

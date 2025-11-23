@@ -1,7 +1,7 @@
 package gestionabscence.Controllers;
 
 import gestionabscence.Entities.Departement;
-import gestionabscence.Utils.DepartementService;
+import gestionabscence.Services.DepartementService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -33,7 +33,7 @@ public class DepartementController {
     // Ajouter
     @PostMapping("/addDepartement")
     public String add(@ModelAttribute Departement departement) {
-        departementService.CreateDepartement(departement);
+        departementService.createDepartement(departement);
         return "redirect:/Departement/allDepartement";
     }
 
@@ -47,14 +47,14 @@ public class DepartementController {
     // Update
     @PostMapping("/update/{id}")
     public String update(@PathVariable Long id, @ModelAttribute Departement departement) {
-        departementService.UpdateDepartement(id, departement);
+        departementService.updateDepartement(id, departement);
         return "redirect:/Departement/allDepartement";
     }
 
     // Delete
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable Long id) {
-        departementService.DeleteDepartement(id);
+        departementService.deleteDepartement(id);
         return "redirect:/Departement/allDepartement";
     }
 

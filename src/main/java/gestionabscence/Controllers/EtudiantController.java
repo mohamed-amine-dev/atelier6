@@ -4,7 +4,7 @@ import gestionabscence.DTOs.EtudiantCreate;
 import gestionabscence.DTOs.EtudiantForm;
 import gestionabscence.DTOs.EtudiantResponse;
 import gestionabscence.DTOs.EtudiantUpdate;
-import gestionabscence.Utils.EtudiantService;
+import gestionabscence.Services.EtudiantService;
 import gestionabscence.Entities.Etudiant;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -58,7 +58,7 @@ public class EtudiantController {
     // Update Etudiant
     @PostMapping("/update/{id}")
     public String updateEtudiant(@PathVariable Long id, @ModelAttribute EtudiantUpdate etudiant) {
-        etudiantService.Update(id, etudiant);
+        etudiantService.update(id, etudiant);
         return "redirect:/Etudiant/allEtudiant";
     }
 
@@ -71,11 +71,11 @@ public class EtudiantController {
 
     // Affecter département
     @PostMapping("/affecter-dep")
-    public String affecterDep(
+    public String assignDepartement(
             @RequestParam Long idEtd,
             @RequestParam Long idDep) {
 
-        etudiantService.affecterDepartement(idEtd, idDep);
+        etudiantService.assignDepartement(idEtd, idDep);
         return "redirect:/Etudiant/allEtudiant";
     }
 }

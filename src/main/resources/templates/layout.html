@@ -2,19 +2,27 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title th:text="${title}">Gestion Absence</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
-<body class="bg-light">
+<body>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+<nav class="navbar navbar-expand-lg navbar-dark mb-4">
     <div class="container-fluid">
-        <a class="navbar-brand" href="/">Gestion Absences</a>
+        <a class="navbar-brand" href="/">📚 Gestion Absences</a>
 
-        <div class="navbar-nav">
-            <a class="nav-link" href="/Etudiant/allEtudiant">Étudiants</a>
-            <a class="nav-link" href="/Departement/allDepartement">Départements</a>
-            <a class="nav-link" href="/abscences">Absences</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <div class="navbar-nav ms-auto">
+                <a class="nav-link" href="/Etudiant/allEtudiant">👥 Étudiants</a>
+                <a class="nav-link" href="/Departement/allDepartement">🏢 Départements</a>
+                <a class="nav-link" href="/abscences">📋 Absences</a>
+            </div>
         </div>
     </div>
 </nav>
@@ -23,5 +31,6 @@
     <div th:replace="~{::body}"></div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

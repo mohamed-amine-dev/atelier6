@@ -5,12 +5,13 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 @Entity
 @Table(name = "etudiant")
 @Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
@@ -37,7 +38,7 @@ public class Etudiant {
     private Departement departement;
 
     @OneToMany(mappedBy = "etudiant", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Abscence> abscences;
+    private List<Absence> absences;
 
 
 }

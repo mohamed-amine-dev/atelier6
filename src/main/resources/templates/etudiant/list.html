@@ -2,24 +2,26 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Liste des Étudiants</title>
 
     <!-- Bootstrap 5 -->
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 
-<body class="bg-light">
+<body>
 
 <!-- HEADER -->
 <div th:replace="fragments/header :: header"></div>
 
 <div class="container mt-4">
 
-    <div class="d-flex justify-content-between align-items-center mb-3">
-        <h2 class="fw-bold text-primary">Liste des étudiants</h2>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold">👥 Liste des Étudiants</h2>
         <a href="/Etudiant/add" class="btn btn-primary">
-            + Ajouter un étudiant
+            ➕ Ajouter un étudiant
         </a>
     </div>
 
