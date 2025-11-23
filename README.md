@@ -10,7 +10,7 @@ Il utilise **Thymeleaf** pour les vues et suit une architecture MVC propre : *Co
 
 Voici le diagramme UML représentant les relations entre les entités :
 
-![Diagramme de classes](src/main/resources/static/images/class-diagram.png)
+![Diagramme de classes](src/main/resources/static/css/images/gestion_abscence.png)
 
 ---
 
